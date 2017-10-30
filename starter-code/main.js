@@ -1,35 +1,47 @@
 window.onload = function startGame() {
   $( document ).ready(function() {
-  var myGameArea = new GameArea("blue");
-  var player = new Player(30, 30, 230, 560, myGameArea.ctx, "red");
-  myGameArea.draw();
-  player.draw();
+      var canvas = document.getElementById('board');
+      var ctx = canvas.getContext('2d');
+      var myGameArea = new GameArea('rgba(0, 0, 0, 0)');
+      var player = new Player(100, 300, 20, 20, myGameArea.ctx, "red");
+      myGameArea.draw();
+      player.draw();
 
-  $(document).keydown(function(e) {
-      switch (e.which) {
-        case 37: player.moveLeft();
-        break;
-        case 39: player.moveRight();
-        break;
-        case 38: player.moveUp();
-        break;
-        case 40: player.moveDown();
-        break;
-      }
-      myGameArea.update(player);
+    function updateGameArea() {
+     requestAnimationFrame(updateGameArea);
+
+        if (player.keys[38]) {
+            player.moveUp();
+        }
+
+        if (player.keys[40]) {
+            player.moveDown();
+        }
+
+        if (player.keys[39]) {
+            player.moveRight();
+        }
+
+        if (player.keys[37]) {
+            player.moveLeft();
+        }
+        ctx.clearRect(0, 0, 690, 690);
+        myGameArea.draw();
+        player.updatePosition();
+        player.draw();
+    };
+
+    document.body.addEventListener("keydown", function (e) {
+      player.keys[e.keyCode] = true;
+
     });
-});
-}
+    document.body.addEventListener("keyup", function (e) {
+      player.keys[e.keyCode] = false;
+    });
 
-// var myObstacles = [];
-// var player;
-// var myGameArea;
-// $( document ).ready(function() {
-//             //Ejecuta todo el codigo , fijense paso a paso el flujo
-//   myGameArea = new GameArea();
-//   myGameArea.start();
-//   player = new Obstacle(30, 30, "red", 0, 110);
-// });
+    updateGameArea();
+});
+};
 
 
 
