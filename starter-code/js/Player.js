@@ -1,24 +1,18 @@
-function Player(x, y, speed, radius, ctx, color) {
+function Player(x, y, speed) {
   this.x = x;
   this.y = y;
   this.speed = speed;
-  this.radius = radius;
   this.Vx = 0;
   this.Vy = 0;
   this.friction = 0.8;
-  this.ctx = ctx;
-  this.color = color;
   this.keys = {};
 };
 
 // Draw player
 Player.prototype.draw = function () {
-  this.ctx.beginPath();
-  this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-  this.ctx.strokeStyle = this.color;
-  this.ctx.stroke();
-  this.ctx.fillStyle = this.color;
-  this.ctx.fill();
+  var img = new Image();
+  img.src = './images/bocasecaman.png';
+  ctx.drawImage(img,this.x,this.y,50,130);
 };
 
 //Moving functions
@@ -70,13 +64,7 @@ Player.prototype.updatePosition = function() {
 
 };
 
-// Player.prototype.addPlayer = function (player) {
-//   var img = new Image();
-//   img.src = './images/ship.png';
-//   img.onload = function() {
-//   player.ctx.drawImage(img,this.x,this.y,40,80);
-// }.bind(this);
-// };
+
 
 
   // Player.prototype.moveLeft =  function() {
