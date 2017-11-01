@@ -1,55 +1,52 @@
-function Objects() {
-  this.x1 = 30;
-  this.y1 = 0;
-  this.x2 = 100;
-  this.y2 = 200;
-  this.x3 = 40;
-  this.y3 = 400;
+function Objects(x, y, speed) {
+  var randomObjectsPositionX = [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475];
+  this.x = randomObjectsPositionX[Math.floor(Math.random() * ((randomObjectsPositionX.length - 0) + 0))];
+  this.y = y;
+  this.speed = speed;
 }
 
-Objects.prototype.createObjects = function(canvas) {
-  canvas.ctx.fillStyle = "#FF0000";
-  canvas.ctx.fillRect(this.x1, this.y1, 150, 30);
-  canvas.ctx.fillRect(this.x2, this.y2, 150, 30);
-  canvas.ctx.fillRect(this.x3, this.y3, 150, 30);
+Objects.prototype.draw = function () {
+  var img = new Image();
+  img.src = './images/ship.png';
+  ctx.drawImage(img, this.x, this.y, 40, 30);
 };
 
-Objects.prototype.moveObjects = function() {
-  if (this.y1 < 580) {
-    this.y1 += 10;
-  } else {
-    this.y1 = 0;
-    this.x1 = Math.floor(Math.random() * 100) + 30;
+Objects.prototype.move = function() {
+  if (timepast < 20){
+    this.y += this.speed;
+    console.log('voy normal');
   }
-  if (this.y2 < 580) {
-    this.y2 += 10;
-  } else {
-    this.y2 = 0;
-    this.x2 = Math.floor(Math.random() * 100) + 100;
+  else if (timepast < 35){
+    this.y += (this.speed*2);
+    console.log('voy follao loko');
   }
-  if (this.y3 < 580) {
-    this.y3 += 10;
-  } else {
-    this.y3 = 0;
-    this.x3 = Math.floor(Math.random() * 100) + 80;
+  else if (timepast < 50){
+    this.y += (this.speed*3);
+    console.log('voy follao loko');
   }
+  else if (timepast < 75){
+    this.y += (this.speed*4);
+    console.log('voy follao loko');
+  }
+  else{
+    this.y += (this.speed*7);
+    console.log('voy a fuego niño');
+  }
+
 };
 
+Objects.prototype.updatePosition = function() {
+  if (this.x >= 480) {
+        this.x = 480;
+    } else if (this.x <= 20) {
+        this.x = 20;
+    }
 
-// function Objects(width, height, x, y, color) {
-//     var randomObjectsPositionX = [50, 100, 150, 200, 250, 300, 350, 400, 450];
-//     this.width = width;
-//     this.height = height;
-//     this.x = x; //randomObjectsPositionX[Math.floor(Math.random() * ((randomObjectsPositionX.length - 0) + 0))];
-//     this.y = y;
-//     this.color = color;
-//    }
-//
-// Objects.prototype.draw = function(){
-//   this.ctx.fillStyle = this.color;
-//   this.ctx.fillRect(this.x, this.y, this.width, this.height);
-// };
-//
-// Objects.prototype.move = function(){
-//   this.y += 10;
-// };
+    if (this.y > 580) {
+        this.y = 580;
+    } else if (this.y <= 20) {
+        this.y = 20;
+    }
+objects.draw();
+
+};

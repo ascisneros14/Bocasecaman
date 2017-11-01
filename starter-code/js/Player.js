@@ -49,18 +49,18 @@ Player.prototype.updatePosition = function() {
   this.y  += this.Vy;
   this.Vx *= this.friction;
   this.x  += this.Vx;
-  if (this.x >= 480) {
-        this.x = 480;
-    } else if (this.x <= 20) {
-        this.x = 20;
+  if (this.x >= 455) {
+        this.x = 455;
+    } else if (this.x <= -5) {
+        this.x = -5;
     }
 
-    if (this.y > 580) {
-        this.y = 580;
-    } else if (this.y <= 20) {
-        this.y = 20;
+    if (this.y > 480) {
+        this.y = 480;
+    } else if (this.y <= 50) {
+        this.y = 50;
     }
-
+player.draw();
 
 };
 

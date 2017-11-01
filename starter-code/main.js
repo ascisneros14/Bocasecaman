@@ -1,7 +1,11 @@
 var randomObjects = [];
 var myGameArea;
 var player;
+var timepast = 0;
 var ctx = document.getElementById('canvas').getContext("2d");
+var canvasWidth = 500;
+var canvasHeight = 600;
+
 
 window.onload = function() {
   document.getElementById('startButton').onclick = function() {
@@ -10,18 +14,26 @@ window.onload = function() {
 
 
 function startGame() {
-    myGameArea = new GameArea('grey');
+    myGameArea = new GameArea();
     player = new Player(230, 450, 20);
+    bullet = new Bullet(player.x + 35, player.y + 35);
+    // objects = new Objects(230, 50, 10);
     myGameArea.draw();
     player.draw();
+    // objects.draw();
+
 
     setInterval(function() {
-        if(myGameArea.counter < 15){
-          randomObjects.push(new Object(30, 30, this.x, 0, myGameArea.ctx, "blue"));
-          myGameArea.counter += 1;
-        }
-      }, 1000);
 
+    if(myGameArea.counter < 1000){
+    randomObjects.push(new Objects(300, 0, 1));
+    randomObjects.push(new Objects(100, 0, 1.5));
+    randomObjects.push(new Objects(200, 0, 2));
+    myGameArea.counter += 1;
+    timepast++;
+    console.log('puntuacion' + timepast);
+    }
+  }, 2000);
 
     updateGameArea();
   };
@@ -34,6 +46,13 @@ document.body.addEventListener("keydown", function(e) {
 document.body.addEventListener("keyup", function(e) {
   player.keys[e.keyCode] = false;
   });
+
+  function objectsDraw() {
+    for (i = 0; i < randomObjects.length; i++) {
+      randomObjects[i].move();
+      randomObjects[i].draw();
+    }
+  }
 
 function updateGameArea() {
     requestAnimationFrame(updateGameArea);
@@ -53,48 +72,14 @@ function updateGameArea() {
     if (player.keys[37]) {
       player.moveLeft();
     }
+
+    if (player.keys[32]) {
+      bullet.draw();
+      
+    }
     ctx.clearRect(0, 0, 500, 600);
     myGameArea.draw();
     player.updatePosition();
-    player.draw();
+
     objectsDraw();
 };
-
-function objectsDraw() {
-  for (i = 0; i < randomObjects.length; i++) {
-    randomObjects[i].move();
-    randomObjects[i].draw();
-  }
-}
-
-
-// var canvas = document.querySelector("#canvas");
-// var context = canvas.getContext("2d");
-//
-// var posX = 0;
-// var posY = 0;
-//
-// context.rect(posX, posY, 50, 50);
-// context.stroke();
-//
-// function move(e) {
-//   // alert(e.keyCode)
-//   if(e.keyCode == 39) {
-//     posX += 10;
-//   }
-//   if(e.keyCode == 37) {
-//     posX -= 10;
-//   }
-//   if(e.keyCode == 38) {
-//     posY -= 10;
-//   }
-//   if(e.keyCode == 40) {
-//     posY += 10;
-//   }
-//
-//   canvas.width = canvas.width;
-//   context.rect(posX, posY, 50, 50);
-//   context.stroke()
-// }
-//
-// document.onkeydown = move;
