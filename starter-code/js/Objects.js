@@ -2,35 +2,37 @@ function Objects(x, y, speed) {
   var randomObjectsPositionX = [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475];
   this.x = randomObjectsPositionX[Math.floor(Math.random() * ((randomObjectsPositionX.length - 0) + 0))];
   this.y = y;
+  this.width = 40;
+  this.height = 30;
   this.speed = speed;
 }
 
 Objects.prototype.draw = function () {
   var img = new Image();
   img.src = './images/ship.png';
-  ctx.drawImage(img, this.x, this.y, 40, 30);
+  ctx.drawImage(img, this.x, this.y, this.width, this.height);
 };
 
 Objects.prototype.move = function() {
-  if (timepast < 20){
+  if (myGameArea.counter < 20){
     this.y += this.speed;
-    console.log('voy normal');
+    //console.log('voy normal');
   }
-  else if (timepast < 35){
+  else if (myGameArea.counter < 35){
     this.y += (this.speed*2);
-    console.log('voy follao loko');
+    //console.log('voy follao loko');
   }
-  else if (timepast < 50){
+  else if (myGameArea.counter < 50){
     this.y += (this.speed*3);
-    console.log('voy follao loko');
+    //console.log('voy follao loko');
   }
-  else if (timepast < 75){
+  else if (myGameArea.counter < 75){
     this.y += (this.speed*4);
-    console.log('voy follao loko');
+    //console.log('voy follao loko');
   }
   else{
     this.y += (this.speed*7);
-    console.log('voy a fuego niño');
+    //console.log('voy a fuego niño');
   }
 
 };
@@ -57,10 +59,10 @@ Objects.prototype.left = function(){
   return this.x;
 };
 
-Obstacle.prototype.left = function(){ return this.x }
+Objects.prototype.left = function(){ return this.x; };
 
-Obstacle.prototype.right = function(){  return this.x + this.width  }
+Objects.prototype.right = function(){  return this.x + this.width;  };
 
-Obstacle.prototype.top = function(){  return this.y }
+Objects.prototype.top = function(){  return this.y; };
 
-Obstacle.prototype.bottom = function(){ return this.y + this.height }
+Objects.prototype.bottom = function(){ return this.y + this.height; };

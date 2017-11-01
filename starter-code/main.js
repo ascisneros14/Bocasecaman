@@ -25,16 +25,30 @@ window.onload = function() {
 
 
     setInterval(function() {
-
-      if (myGameArea.counter < 1000) {
+      if (timepast % 100 === 0) {
         randomObjects.push(new Objects(300, 0, 1));
         randomObjects.push(new Objects(100, 0, 1.5));
         randomObjects.push(new Objects(200, 0, 2));
         myGameArea.counter += 1;
-        timepast++;
-        console.log('puntuacion' + timepast);
       }
-    }, 2000);
+      timepast++;
+      for(i=0; i<randomObjects.length; i++) {
+        if(checkIfOut(randomObjects[i])) {
+          randomObjects.splice(i,1);
+        };
+      }
+      for(k=0; k<arrayBullet.length; k++) {
+        if(checkIfBulletOut(arrayBullet[k])) {
+          arrayBullet.splice(k,1);
+        };
+        for(p=0; p<randomObjects.length; p++) {
+          if(crashWith(arrayBullet[k], randomObjects[p])) {
+            arrayBullet.splice(k,1);
+            randomObjects.splice(p,1);
+          };
+        }
+      }
+    }, 30);
 
     updateGameArea();
   };
@@ -49,16 +63,16 @@ document.body.addEventListener("keyup", function(e) {
 });
 
 function objectsDraw() {
-  for (i = 0; i < arrayBullet.length; i++) {
-    arrayBullet[i].move();
-    arrayBullet[i].draw();
+  for (i = 0; i < randomObjects.length; i++) {
+    randomObjects[i].move();
+    randomObjects[i].draw();
   }
 }
 
 function bulletDraw() {
-  for (i = 0; i < randomObjects.length; i++) {
-    randomObjects[i].move();
-    randomObjects[i].draw();
+  for (i = 0; i < arrayBullet.length; i++) {
+    arrayBullet[i].move();
+    arrayBullet[i].draw();
   }
 }
 
@@ -91,12 +105,17 @@ function updateGameArea() {
   objectsDraw();
 };
 
-Obstacle.prototype.crashWith = function(obstacle){
-//Condiciones que usamos para comprobar la colision
-//daros cuenta que devolvemos False cuando dentro de ella se
-//comprueba que son true
-  return !((this.bottom() < obstacle.top())    ||
-           (this.top()    > obstacle.bottom()) ||
-           (this.right()  < obstacle.left())   ||
-           (this.left()   > obstacle.right()))
+function checkIfOut(object) {
+  return object.y >= canvasHeight ? true : false;
+}
+
+function checkIfBulletOut(object) {
+  return object.y <= 0 ? true : false;
+}
+
+function crashWith(bullet,objects){
+  return !((objects.bottom() < bullet.top())    ||
+           (objects.top()    > bullet.bottom()) ||
+           (objects.right()  < bullet.left())   ||
+           (objects.left()   > bullet.right()));
 }

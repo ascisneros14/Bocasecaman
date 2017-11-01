@@ -1,12 +1,14 @@
-function Bullet(x, y){
+function Bullet(x, y, width, height){
   this.x = x;
   this.y = y;
+  this.width = 5;
+  this.height = 10;
 }
 
 Bullet.prototype.draw = function () {
   var img = new Image();
   img.src = './images/bullet.png';
-  ctx.drawImage(img,this.x,this.y,5,10);
+  ctx.drawImage(img,this.x,this.y,this.width, this.height);
 };
 
 Bullet.prototype.move = function(){
@@ -17,10 +19,10 @@ Bullet.prototype.updatePosition = function(){
   this.draw();
 };
 
-Obstacle.prototype.left = function(){ return this.x }
+Bullet.prototype.left = function(){ return this.x; };
 
-Obstacle.prototype.right = function(){  return this.x + this.width  }
+Bullet.prototype.right = function(){  return this.x + this.width; };
 
-Obstacle.prototype.top = function(){  return this.y }
+Bullet.prototype.top = function(){  return this.y; };
 
-Obstacle.prototype.bottom = function(){ return this.y + this.height }
+Bullet.prototype.bottom = function(){ return this.y + this.height; };
