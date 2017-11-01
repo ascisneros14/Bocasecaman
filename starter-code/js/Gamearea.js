@@ -1,9 +1,8 @@
-function GameArea (x, y, width, height, speed) {
+function GameArea (x, y, width, height) {
   this.x = x;
   this.y = y;
 	this.width = 0;
 	this.height = 0;
-  this.speed = 1;
   this.counter = 0;
 };
 

@@ -44,6 +44,11 @@ Player.prototype.moveDown = function () {
   console.log("moveDown was called");
 };
 
+Player.prototype.bullet = function (){
+  bullet = new Bullet(player.x, player.y);
+  arrayBullet.push(new Bullet(player.x +35, player.y));
+};
+
 Player.prototype.updatePosition = function() {
   this.Vy *= this.friction;
   this.y  += this.Vy;
@@ -60,7 +65,7 @@ Player.prototype.updatePosition = function() {
     } else if (this.y <= 50) {
         this.y = 50;
     }
-player.draw();
+    this.draw();
 
 };
 

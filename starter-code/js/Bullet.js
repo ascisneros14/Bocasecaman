@@ -10,11 +10,17 @@ Bullet.prototype.draw = function () {
 };
 
 Bullet.prototype.move = function(){
-  this.y += 20;
+  this.y -= 5;
 };
 
-Bullet.prototype.updatePosition = function() {
-
-bullet.draw();
-
+Bullet.prototype.updatePosition = function(){
+  this.draw();
 };
+
+Obstacle.prototype.left = function(){ return this.x }
+
+Obstacle.prototype.right = function(){  return this.x + this.width  }
+
+Obstacle.prototype.top = function(){  return this.y }
+
+Obstacle.prototype.bottom = function(){ return this.y + this.height }

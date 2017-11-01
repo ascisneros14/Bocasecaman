@@ -35,6 +35,8 @@ Objects.prototype.move = function() {
 
 };
 
+
+
 Objects.prototype.updatePosition = function() {
   if (this.x >= 480) {
         this.x = 480;
@@ -50,3 +52,15 @@ Objects.prototype.updatePosition = function() {
 objects.draw();
 
 };
+
+Objects.prototype.left = function(){
+  return this.x;
+};
+
+Obstacle.prototype.left = function(){ return this.x }
+
+Obstacle.prototype.right = function(){  return this.x + this.width  }
+
+Obstacle.prototype.top = function(){  return this.y }
+
+Obstacle.prototype.bottom = function(){ return this.y + this.height }
