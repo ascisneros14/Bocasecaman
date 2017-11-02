@@ -9,7 +9,7 @@ function Objects(x, y, speed) {
 
 Objects.prototype.draw = function () {
   var img = new Image();
-  img.src = './images/ship.png';
+  img.src = './images/nubes.png';
   ctx.drawImage(img, this.x, this.y, this.width, this.height);
 };
 
@@ -36,8 +36,6 @@ Objects.prototype.move = function() {
   }
 
 };
-
-
 
 Objects.prototype.updatePosition = function() {
   if (this.x >= 480) {

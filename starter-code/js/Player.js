@@ -8,13 +8,14 @@ function Player(x, y, speed) {
   this.Vy = 0;
   this.friction = 0.8;
   this.keys = {};
+  this.lifes = [1,2,3,4,5];
 };
 
 // Draw player
 Player.prototype.draw = function () {
   var img = new Image();
   img.src = './images/bocasecaman.png';
-  ctx.drawImage(img,this.x,this.y,50,130);
+  ctx.drawImage(img,this.x,this.y,this.width,this.height);
 };
 
 //Moving functions
@@ -46,10 +47,20 @@ Player.prototype.moveDown = function () {
   console.log("moveDown was called");
 };
 
+
 Player.prototype.bullet = function (){
   bullet = new Bullet(player.x, player.y);
   arrayBullet.push(new Bullet(player.x +35, player.y));
 };
+
+Player.prototype.left = function(){ return this.x; };
+
+Player.prototype.right = function(){  return this.x + this.width;  };
+
+Player.prototype.top = function(){  return this.y; };
+
+Player.prototype.bottom = function(){ return this.y + this.height; };
+
 
 Player.prototype.updatePosition = function() {
   this.Vy *= this.friction;
@@ -58,8 +69,8 @@ Player.prototype.updatePosition = function() {
   this.x  += this.Vx;
   if (this.x >= 455) {
         this.x = 455;
-    } else if (this.x <= -5) {
-        this.x = -5;
+    } else if (this.x <= -25) {
+        this.x = -25;
     }
 
     if (this.y > 480) {
@@ -70,6 +81,7 @@ Player.prototype.updatePosition = function() {
     this.draw();
 
 };
+
 
 
 

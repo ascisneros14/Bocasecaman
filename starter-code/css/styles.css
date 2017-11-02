@@ -2,8 +2,19 @@ body {
 
 }
 
+#container {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
 canvas {
-  background-image: url("./img/giphy-downsized.gif");
   border: 1px solid #000;
-  margin: 50px auto;
+  display: flex;
+}
+
+#lifes {
+  display: flex;
 }

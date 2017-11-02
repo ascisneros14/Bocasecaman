@@ -7,11 +7,15 @@ var ctx = document.getElementById('canvas').getContext("2d");
 var canvasWidth = 500;
 var canvasHeight = 600;
 var arrayBullet = [];
+var arrayPlayer = [];
+
+
 
 window.onload = function() {
   document.getElementById('startButton').onclick = function() {
     startGame();
   };
+
 
 
   function startGame() {
@@ -22,6 +26,7 @@ window.onload = function() {
     //myGameArea.draw();
     //player.draw();
     // objects.draw();
+  document.getElementById("lifes").innerHTML = player.lifes;
 
 
     setInterval(function() {
@@ -29,12 +34,16 @@ window.onload = function() {
         randomObjects.push(new Objects(300, 0, 1));
         randomObjects.push(new Objects(100, 0, 1.5));
         randomObjects.push(new Objects(200, 0, 2));
+        randomObjects.push(new Objects(200, 0, 0.5));
         myGameArea.counter += 1;
       }
       timepast++;
       for(i=0; i<randomObjects.length; i++) {
         if(checkIfOut(randomObjects[i])) {
           randomObjects.splice(i,1);
+          player.lifes.pop();
+          document.getElementById("lifes").innerHTML = player.lifes;
+          console.log(player.lifes);
         };
       }
       for(k=0; k<arrayBullet.length; k++) {
@@ -45,9 +54,19 @@ window.onload = function() {
           if(crashWith(arrayBullet[k], randomObjects[p])) {
             arrayBullet.splice(k,1);
             randomObjects.splice(p,1);
+            console.log(bullet.top);
           };
         }
       }
+
+      for(p=0; p<randomObjects.length; p++) {
+        if(crashWith2(player, randomObjects[p])) {
+          // delete window.player;
+
+          randomObjects.splice(p,1);
+        };
+      }
+
     }, 30);
 
     updateGameArea();
@@ -61,6 +80,7 @@ document.body.addEventListener("keydown", function(e) {
 document.body.addEventListener("keyup", function(e) {
   player.keys[e.keyCode] = false;
 });
+
 
 function objectsDraw() {
   for (i = 0; i < randomObjects.length; i++) {
@@ -118,4 +138,11 @@ function crashWith(bullet,objects){
            (objects.top()    > bullet.bottom()) ||
            (objects.right()  < bullet.left())   ||
            (objects.left()   > bullet.right()));
+}
+
+function crashWith2(player,objects){
+  return !((objects.bottom() < player.top())    ||
+           (objects.top()    > player.bottom()) ||
+           (objects.right()  < player.left())   ||
+           (objects.left()   > player.right()));
 }
