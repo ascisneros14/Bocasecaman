@@ -10,13 +10,20 @@
     <div id="container">
       <div>
       <h2>Health</h2>
-    <div id = "lifes"></div>
+      <div id = "lifes"></div>
+      <h2>Score</h2>
+      <div id = "score"></div>
   </div>
-    <button id = 'startButton'>Start Game</button>
+  <button id = 'startButton'>Start Game</button>
   <canvas id="canvas" width="500" height="600">
   Your browser does not support canvas. Please try again with a different browser.
   </canvas>
+  <div id="gameover" class="hidden">
+    Oh no! You lost.
+  </div>
+  <audio autoplay volume="0.8" loop><source src='./audio/bocasecamanjuego.mp3'></audio>
 </div>
+<a href="index.html"><button id = 'restart'>Restart</button></a>
   <script src="./js/Gamearea.js"></script>
   <script src="./js/Player.js"></script>
   <script src="./js/Objects.js"></script>

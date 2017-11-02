@@ -8,7 +8,7 @@ var canvasWidth = 500;
 var canvasHeight = 600;
 var arrayBullet = [];
 var arrayPlayer = [];
-
+var prueba;
 
 
 window.onload = function() {
@@ -16,20 +16,14 @@ window.onload = function() {
     startGame();
   };
 
-
-
   function startGame() {
     myGameArea = new GameArea();
     player = new Player(230, 450, 20);
-    // bullet = new Bullet(player.x + 35, player.y + 35);
-    // objects = new Objects(230, 50, 10);
-    //myGameArea.draw();
-    //player.draw();
-    // objects.draw();
+
   document.getElementById("lifes").innerHTML = player.lifes;
 
 
-    setInterval(function() {
+  var prueba =  setInterval(function() {
       if (timepast % 100 === 0) {
         randomObjects.push(new Objects(300, 0, 1));
         randomObjects.push(new Objects(100, 0, 1.5));
@@ -38,6 +32,14 @@ window.onload = function() {
         myGameArea.counter += 1;
       }
       timepast++;
+      document.getElementById("score").innerHTML = timepast++;
+
+      if(player.lifes == 0){
+        clearInterval(prueba);
+        $('canvas').css('display','none');
+        $('#gameover').toggleClass('hidden active');
+      }
+
       for(i=0; i<randomObjects.length; i++) {
         if(checkIfOut(randomObjects[i])) {
           randomObjects.splice(i,1);
@@ -62,7 +64,6 @@ window.onload = function() {
       for(p=0; p<randomObjects.length; p++) {
         if(crashWith2(player, randomObjects[p])) {
           // delete window.player;
-
           randomObjects.splice(p,1);
         };
       }
@@ -73,6 +74,12 @@ window.onload = function() {
   };
 };
 
+// function myStopFunction() {
+//   if(arrayPlayer[index].length == 0){
+//     clearInterval(prueba);
+//   }
+//
+// }
 
 document.body.addEventListener("keydown", function(e) {
   player.keys[e.keyCode] = true;

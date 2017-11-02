@@ -8,6 +8,6 @@ function GameArea (x, y, width, height) {
 
 GameArea.prototype.draw = function () {
   var img = new Image();
-  img.src = './images/space.png';
+  img.src = './images/fondocanvas.jpg';
   ctx.drawImage(img,0,0,500,600);
 };

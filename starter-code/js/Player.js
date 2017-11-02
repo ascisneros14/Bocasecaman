@@ -8,7 +8,7 @@ function Player(x, y, speed) {
   this.Vy = 0;
   this.friction = 0.8;
   this.keys = {};
-  this.lifes = [1,2,3,4,5];
+  this.lifes = [1,2,3,4,5,6,7,8,9,10];
 };
 
 // Draw player
@@ -52,6 +52,7 @@ Player.prototype.bullet = function (){
   bullet = new Bullet(player.x, player.y);
   arrayBullet.push(new Bullet(player.x +35, player.y));
 };
+
 
 Player.prototype.left = function(){ return this.x; };
 
