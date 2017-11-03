@@ -36,8 +36,8 @@ window.onload = function() {
 
       if(player.lifes == 0){
         clearInterval(prueba);
-        $('canvas').css('display','none');
-        $('#gameover').toggleClass('hidden active');
+        $('#gameover').removeClass('display');
+        // $(('gameover').css('background-image': ''));
       }
 
       for(i=0; i<randomObjects.length; i++) {
@@ -124,6 +124,7 @@ function updateGameArea() {
 
   if (player.keys[49]) {
     player.bullet();
+    // $("#tos").play();
   }
   ctx.clearRect(0, 0, 500, 600);
   myGameArea.draw();
