@@ -82,32 +82,3 @@ Player.prototype.updatePosition = function() {
     this.draw();
 
 };
-
-
-
-
-
-  // Player.prototype.moveLeft =  function() {
-  //   if(this.x > 0){
-  //     this.x -= 10;
-  //   }
-  // };
-  // Player.prototype.moveRight = function() {
-  //   if(this.x < 470){
-  //     this.x += 10;
-  //   }
-  // };
-  // Player.prototype.moveUp =  function() {
-  //   if(this.y > 0){
-  //     this.y -= 10;
-  //   }
-  // };
-  // Player.prototype.moveDown = function() {
-  //   if(this.y < 570){
-  //     this.y += 10;
-  //   }
-  // };
-
-
-// Player.prototype.shoot = function (){
-// };

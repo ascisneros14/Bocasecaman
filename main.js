@@ -37,7 +37,6 @@ window.onload = function() {
       if(player.lifes == 0){
         clearInterval(prueba);
         $('#gameover').removeClass('display');
-        // $(('gameover').css('background-image': ''));
       }
 
       for(i=0; i<randomObjects.length; i++) {
@@ -73,13 +72,6 @@ window.onload = function() {
     updateGameArea();
   };
 };
-
-// function myStopFunction() {
-//   if(arrayPlayer[index].length == 0){
-//     clearInterval(prueba);
-//   }
-//
-// }
 
 document.body.addEventListener("keydown", function(e) {
   player.keys[e.keyCode] = true;
